@@ -583,6 +583,7 @@ export default {
             _in: idOpereMTC,
           };
         }
+
         const response = await directus
           .items(collection.value)
           .readByQuery(query);
@@ -691,9 +692,11 @@ export default {
 
         counter.value++;
       });
-      for (let index = 0; index < items.value.length; index++) {
-        document.getElementById("photo-" + index).src = imageurl.value;
-      }
+      try {
+        for (let index = 0; index < items.value.length; index++) {
+          document.getElementById("photo-" + index).src = imageurl.value;
+        }
+    
 
       url.value = import.meta.env.VITE_API_BASE_URL;
       const imagesDirectory = await directus
@@ -727,6 +730,7 @@ export default {
 
         counter.value++;
       });
+        } catch (error) {}
     }
     async function fetchIconSaved() {
       me.value = await directus.users.me.read();
