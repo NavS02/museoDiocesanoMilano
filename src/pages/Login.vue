@@ -14,7 +14,7 @@
 
                   <i class="bi bi-house text-primary"></i>
                 <router-link class="nav-link" :to="{ name: 'home' }">
-                  Opera delle Metropolitana</router-link
+                  Museo diocesano</router-link
                 >
               </a>
             </div>

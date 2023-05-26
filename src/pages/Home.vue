@@ -1,33 +1,15 @@
 <template>
   <div class="container">
     <div class="card">
-      <img src="/logoSiena.png" alt="Logo" class="logo" />
+      <img src="/logoMilano.png" alt="Logo" class="logo" />
 
       <div class="options">
-        <div class="card" @click="onOptionClicked('inventario')">
-          <div class="card-icon">
-            <font-awesome-icon :icon="['fa-solid', 'fa-boxes-stacked']" />
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Inventario</h5>
-          </div>
-        </div>
-
         <div class="card" @click="onOptionClicked('archivio')">
           <div class="card-icon">
             <font-awesome-icon :icon="['fa-solid', 'fa-paintbrush']" />
           </div>
           <div class="card-body">
-            <h5 class="card-title">Archivio</h5>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">
-            <font-awesome-icon :icon="['fas', 'image']" />
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Fototeca</h5>
+            <h5 class="card-title">Archivio opere d'arte</h5>
           </div>
         </div>
       </div>
@@ -63,9 +45,13 @@ export default {
 
 <style scoped>
 .container {
-  max-width: 1024px;
+   max-width: 1024px;
   margin: auto;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh; /* opcional si quieres que el contenedor ocupe toda la altura de la pantalla */
 }
 
 .header {
@@ -107,7 +93,7 @@ export default {
 
 .card-icon {
   font-size: 48px;
-  color: #007bff;
+  color: #861B2A;
   margin-bottom: 10px;
 }
 

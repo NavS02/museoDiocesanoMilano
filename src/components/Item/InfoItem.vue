@@ -525,7 +525,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Type 1</h5>
                     <img
-                      src="/option1.png"
+                      src=""
                       style="width: 100%"
                       @click="print()"
                     />
@@ -538,7 +538,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Type 2</h5>
                     <img
-                      src="/option1.png"
+                      src=""
                       style="width: 100%"
                       @click="print()"
                     />

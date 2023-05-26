@@ -116,7 +116,7 @@
                     <div class="row align-items-center justify-content-between">
                       <div class="col-lg-3 col-md-3 label">Compagnia</div>
                       <div class="col-lg-9 col-md-9">
-                        Opera della Metropolitana
+                        Museo diocesano
                       </div>
                     </div>
 
@@ -523,7 +523,6 @@ export default {
     }
     function updateImage() {
       let img = document.getElementById("profilePictureSelector").value;
-      console.log(img);
       imageurl.value = img;
     }
     function toggleClass() {

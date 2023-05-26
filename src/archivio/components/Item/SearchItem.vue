@@ -344,7 +344,7 @@
           </div>
           <div class="modal-body">
             <div class="row">
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <!-- First print type -->
                 <div class="card cardSelector">
                   <div class="card-body">
@@ -357,7 +357,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <!-- Second print type -->
                 <div class="card cardSelector">
                   <div class="card-body">
@@ -366,19 +366,6 @@
                       src="/sPrestito.png"
                       style="width: 100%"
                       @click="printP(item)"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <!-- Third print type -->
-                <div class="card cardSelector">
-                  <div class="card-body">
-                    <h5 class="card-title">Visualizzare item</h5>
-                    <img
-                      src="/option1.png"
-                      style="width: 100%"
-                      @click="printInfo(item)"
                     />
                   </div>
                 </div>
@@ -417,7 +404,7 @@ export default {
     let currentItem = ref();
     let selectedOption = ref("list");
     const url = ref();
-    let imageurl = ref("/logoopaSiena.png");
+    let imageurl = ref("/logoMilanosmall.jpg");
     const me = ref();
     const showAlert = ref(false);
     const counter = ref(0);
@@ -511,7 +498,7 @@ export default {
             },
             limit: -1,
           });
-          if (privateData.data.length > 1) {
+          if (privateData.data.length > 0) {
             const ids = privateData.data.map((item) => item.id);
             const opereAutore = await directus
               .items("opera_autore")
@@ -543,7 +530,7 @@ export default {
             },
             limit: -1,
           });
-          if (privateData.data.length > 1) {
+          if (privateData.data.length > 0) {
             const ogtdId = privateData.data.map(({ id }) => id);
             query["filter"]["ogtd"] = { _in: ogtdId };
           } else {
@@ -552,7 +539,7 @@ export default {
         }
         // INVENTARIO
         if (resultInv !== "") {
-          const privateData = await directus.items("inventario").readByQuery({
+          const privateData = await directus.items("inv").readByQuery({
             filter: {
               invn: { _eq: resultInv },
             },
@@ -560,15 +547,15 @@ export default {
           });
           const idInv = privateData.data.map(({ id }) => id);
           const opereInventario = await directus
-            .items("opera_inventario")
+            .items("opera_inv")
             .readByQuery({
               filter: {
-                inventario_id: { _in: idInv },
+                inv_id: { _in: idInv },
               },
               limit: -1,
             });
           const idInvOp = opereInventario.data.map(({ id }) => id);
-          query["filter"]["inventario"] = {
+          query["filter"]["inv"] = {
             _in: idInvOp,
           };
         }
@@ -776,7 +763,7 @@ export default {
       totalPages.value = 0;
       url.value = window.location.origin;
       itemsFiltered = null;
-
+      loaded.value = true;
       // CLEAR TABLE
       items.value = null;
     }

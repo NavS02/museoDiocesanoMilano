@@ -91,7 +91,6 @@ export default {
         return [
             {key:'id',label:'ID',sortable:false},
             {key:'dtzg',label:'Dtzg',sortable: true},
-            {key:'dtzs',label:'Dtzs',sortable: true},
             {key:'dtsi',label:'Dtsi',sortable: true},
             {key:'dtsf',label:'Dtsf',sortable: true},
             {key:'dtsv',label:'Dtsv',sortable: true},

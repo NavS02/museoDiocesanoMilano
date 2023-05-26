@@ -18,7 +18,7 @@
             SCHEDA PRESTITO
           </p>
           <img
-            src="/logoSiena.png"
+            src="/public/logoMilano.png"
             alt=""
             class="center-img"
             style="width: 300px; margin: 0 auto"

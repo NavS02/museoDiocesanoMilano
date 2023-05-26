@@ -16,7 +16,7 @@
       <div class="card" style="width: 100%; height: 50%">
         <div class="card-header">
           <img
-            src="/logoSiena.png"
+            src="/public/logoMilano.png"
             alt=""
             class="center"
             style="width: 300px"
@@ -219,7 +219,6 @@ export default {
                     },
                   },
                 });
-                console.log(item_inventario)
               const inventarioIds = item_inventario.data.map(
                 ({ inventario_id }) => inventario_id
               );

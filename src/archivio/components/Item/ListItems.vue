@@ -83,7 +83,7 @@ function onEditClicked(item) {
     router.push({name: 'editItemArc', params: { id: item.id, collection:collection.value }})
 }
 async function onDeleteClicked(item) {
-    const confirmed = await modal.confirm({title:'Confirm', body:'Sei sicuro di voler eliminare questo elemento?'})
+    const confirmed = await modal.confirm({title:'Confirma', body:'Sei sicuro di voler eliminare questo elemento?'})
     if(confirmed) deleteItem(item)
 }
 

@@ -364,7 +364,7 @@ export default {
     let currentPage = ref(2);
     let selectedOption = ref("list");
     const url = ref();
-    let imageurl = ref("/logoopaSiena.png");
+    let imageurl = ref("/");
 
     // watch the route and update data based on the collection param
     watch(
@@ -466,7 +466,6 @@ export default {
           if (privateData.data.length >= 1) {
 
             const ids = privateData.data.map((item) => item.id);
-            console.log(ids)
             query["filter"]["id"] = { _in: ids };
           } else {
             query["filter"]["autore"] = { _in: null };

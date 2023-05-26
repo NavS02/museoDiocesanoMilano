@@ -47,7 +47,7 @@ export default {
     class="header fixed-top d-flex align-items-center justify-content-between"
   >
     <div class="d-flex align-items-center">
-      <img src="/logoSiena.png" alt="" style="height: 50px" />
+      <img src="/logoMilano.png" alt="" style="height: 50px" />
       <i class="bi bi-list toggle-sidebar-btn" @click="toggleClass"></i>
     </div>
 

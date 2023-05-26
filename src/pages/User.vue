@@ -116,7 +116,7 @@
                     <div class="row align-items-center justify-content-between">
                       <div class="col-lg-3 col-md-3 label">Company</div>
                       <div class="col-lg-9 col-md-9">
-                        Opera della Metropolitana
+                        Museo diocesano
                       </div>
                     </div>
 
