@@ -6,7 +6,7 @@
         <div class="col-md-6">
           <h5 class="card-title">ID:</h5>
           <input
-            type="number"
+            type="text"
             class="form-control"
             aria-label="Small"
             aria-describedby="inputGroup-sizing-sm"

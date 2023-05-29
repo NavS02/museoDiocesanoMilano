@@ -2,86 +2,9 @@
   <main id="main" class="main">
     <div class="col-12">
       <!-- Search Form -->
-      <div class="row">
-        <div class="col-md-6">
-          <h5 class="card-title">ID:</h5>
-          <input
-            type="number"
-            class="form-control"
-            aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm"
-            id="resultID"
-          />
-        </div>
-        <div class="col-md-6">
-          <h5 class="card-title">Autore (AUTN):</h5>
-          <input
-            type="text"
-            class="form-control"
-            aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm"
-            id="resultAutore"
-          />
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <h5 class="card-title">Soggetto (SGTI):</h5>
-          <input
-            type="text"
-            class="form-control"
-            aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm"
-            id="resultSGTI"
-          />
-        </div>
-        <div class="col-md-6">
-          <h5 class="card-title">Inventario (INVN):</h5>
-          <input
-            type="text"
-            class="form-control"
-            aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm"
-            id="resultInv"
-          />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <h5 class="card-title">Titolo (SGTT):</h5>
-          <input
-            type="text"
-            class="form-control"
-            aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm"
-            id="resultSGTT"
-          />
-        </div>
-        <div class="col-md-6">
-          <h5 class="card-title">Oggetto (OGTD):</h5>
-          <input
-            type="text"
-            class="form-control"
-            aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm"
-            id="resultOGTD"
-          />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <h5 class="card-title">Tecnica (MTC):</h5>
-          <input
-            type="text"
-            class="form-control"
-            aria-label="Small"
-            aria-describedby="inputGroup-sizing-sm"
-            id="resultMTC"
-          />
-        </div>
-      </div>
-
+      <keep-alive>
+        <searchForm />
+      </keep-alive>
       <br />
       <button
         type="button"
@@ -210,8 +133,8 @@
                         class="text-center"
                         style="
                           border: 1px solid #999999;
-                          width: 200px;
-                          height: 200px;
+                          width: 300px;
+                          height: 300px;
                           margin: 0 auto;
                           margin-top: 15px;
                         "
@@ -219,7 +142,11 @@
                         <img
                           :src="imageurl"
                           alt=""
-                          style="width: 170px; height: 170px; margin-top: 15px"
+                          style="
+                            max-width: 250px;
+                            max-height: 250px;
+                            margin-top: 15px;
+                          "
                           :id="'photo-' + index"
                         />
                       </div>
@@ -386,9 +313,9 @@ import { directus } from "../../API/";
 import * as settings from "../../settings/";
 import Table from "../common/Table/Table.vue";
 import Loaded from "../common/Loader.vue";
-
+import searchForm from "./searchForm.vue"
 export default {
-  components: { Table, Loaded },
+  components: { Table, Loaded, searchForm },
   setup() {
     const route = useRoute();
     const router = useRouter();
@@ -696,41 +623,42 @@ export default {
         for (let index = 0; index < items.value.length; index++) {
           document.getElementById("photo-" + index).src = imageurl.value;
         }
-    
 
-      url.value = import.meta.env.VITE_API_BASE_URL;
-      const imagesDirectory = await directus
-        .items("directus_files")
-        .readByQuery({ limit: -1 });
-      counter.value = 0;
+        url.value = import.meta.env.VITE_API_BASE_URL;
+        const imagesDirectory = await directus
+          .items("directus_files")
+          .readByQuery({ limit: -1 });
+        counter.value = 0;
 
-      items.value.forEach((item) => {
-        if (item.icona !== null) {
-          imagesDirectory.data.forEach((imageItem) => {
-            if (item.icona == imageItem.id) {
-              image.value = imageItem.id;
-            }
-          });
-
-          let imageElement = document.getElementById("photo-" + counter.value);
-          const imageUrl = url.value + "/assets/" + image.value; // generates url
-
-          fetch(imageUrl)
-            .then((response) => response.blob())
-            .then((blob) => {
-              // CODE64 IMAGE
-              const reader = new FileReader();
-              reader.readAsDataURL(blob);
-              reader.onloadend = () => {
-                const base64data = reader.result; //code64 the url
-                imageElement.src = base64data;
-              };
+        items.value.forEach((item) => {
+          if (item.icona !== null) {
+            imagesDirectory.data.forEach((imageItem) => {
+              if (item.icona == imageItem.id) {
+                image.value = imageItem.id;
+              }
             });
-        }
 
-        counter.value++;
-      });
-        } catch (error) {}
+            let imageElement = document.getElementById(
+              "photo-" + counter.value
+            );
+            const imageUrl = url.value + "/assets/" + image.value; // generates url
+
+            fetch(imageUrl)
+              .then((response) => response.blob())
+              .then((blob) => {
+                // CODE64 IMAGE
+                const reader = new FileReader();
+                reader.readAsDataURL(blob);
+                reader.onloadend = () => {
+                  const base64data = reader.result; //code64 the url
+                  imageElement.src = base64data;
+                };
+              });
+          }
+
+          counter.value++;
+        });
+      } catch (error) {}
     }
     async function fetchIconSaved() {
       me.value = await directus.users.me.read();
