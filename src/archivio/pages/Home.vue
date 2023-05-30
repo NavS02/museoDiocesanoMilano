@@ -15,8 +15,8 @@
                   {{ totalOpere }}
                 </div>
               </div>
-              <div class="col-auto" >
-                <i class="bi bi-easel fa-3x" ></i>
+              <div class="col-auto">
+                <i class="bi bi-easel fa-3x"></i>
               </div>
             </div>
           </div>
@@ -66,15 +66,12 @@
         </div>
       </div>
     </div>
-    
   </main>
 </template>
 
 <script>
-import { ref, computed, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { ref } from "vue";
 import { directus } from "../API/";
-import * as settings from "../settings/";
 
 export default {
   setup() {
@@ -84,19 +81,22 @@ export default {
 
     fetchDashboard();
     async function fetchDashboard() {
-      const responseOp = await directus
-        .items("opera")
-        .readByQuery({ limit: -1 });
+      const responseOp = await directus.items("opera").readByQuery({
+        fields: ["COUNT(*)"],
+        limit: -1,
+      });
       totalOpere.value = responseOp.data.length;
 
-      const responseAut = await directus
-        .items("autore")
-        .readByQuery({ limit: -1 });
+      const responseAut = await directus.items("autore").readByQuery({
+        fields: ["COUNT(*)"],
+        limit: -1,
+      });
       totalAutori.value = responseAut.data.length;
 
-      const responseIscriz = await directus
-        .items("iscrizione")
-        .readByQuery({ limit: -1 });
+      const responseIscriz = await directus.items("iscrizione").readByQuery({
+        fields: ["COUNT(*)"],
+        limit: -1,
+      });
       totalIscrizioni.value = responseIscriz.data.length;
     }
     return {
@@ -112,5 +112,4 @@ export default {
 .bi {
   font-size: 3.5rem;
 }
-
 </style>

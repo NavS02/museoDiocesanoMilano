@@ -1,10 +1,15 @@
 <template>
   <main id="main" class="main">
     <div class="col-12">
+
+
+
       <!-- Search Form -->
       <keep-alive>
         <searchForm />
       </keep-alive>
+
+      
       <br />
       <button
         type="button"
@@ -28,6 +33,7 @@
         @input="infoQty()"
       />
       &nbsp
+      {{ totalResult }} schede trovate
 
       <div class="form-check" style="float: right">
         <input
@@ -106,12 +112,12 @@
 
         <div class="card-body" v-if="selectedOption === 'card'">
           <div class="row">
-            <div class="col-12">
+            <div class="col-15">
               <div class="row">
                 <div
                   v-for="(item, index) in items"
                   :key="index"
-                  class="mb-3 col-md-2"
+                  class="mb-3 col-md-3"
                   style="margin-bottom: 20px"
                 >
                   <div class="card" style="height: 100%; margin: -5px">
@@ -303,6 +309,7 @@
       </div>
     </div>
     <Loaded v-if="!loaded" />
+    <h1 class="text-center" v-if="noResult">Nessun risultato</h1>
   </main>
 </template>
 
@@ -337,6 +344,7 @@ export default {
     const counter = ref(0);
     const loaded = ref(true);
     const image = ref();
+    let noResult=ref(false)
     // watch the route and update data based on the collection param
     watch(
       route,
@@ -523,11 +531,18 @@ export default {
           loaded.value = true;
 
           items.value = data;
+  noResult.value=false
+
         }
       } catch (error) {
         items.value = null;
       }
       // SAVED ITEMS
+if(items.value==null){
+  loaded.value=true;
+  noResult.value=true
+
+}
       infoQty();
     }
     async function fetchRelations() {
@@ -782,6 +797,7 @@ export default {
       imageurl,
       showAlert,
       loaded,
+      noResult,
       onEditClicked,
       onDeleteClicked,
       onInfoClicked,

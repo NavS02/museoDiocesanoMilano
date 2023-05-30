@@ -49,9 +49,9 @@ export default {
         quality: 10,
         column: 4,
       }),
-      new Files({ name: 'images', label: 'Multiple Images', foreign_key:'directus_files_id', value:[],
+      new Files({ name: 'images', label: 'Altre imagini', foreign_key:'directus_files_id', value:[],
       fit: 'contain', width: 100, height: 100, quality: 80,column: 4 }),
-      new Files({ name: 'files', label: 'Multiple Files', foreign_key:'directus_files_id', value:[],
+      new Files({ name: 'files', label: 'Files allegati', foreign_key:'directus_files_id', value:[],
       fit: 'contain', width: 100, height: 100, quality: 80,column:4 }),
 
       
@@ -109,12 +109,18 @@ export default {
       }),
 
       /* inventario */
-
+      new FormField({
+        name: "invn",
+        label: "Numero Inventario",
+        type: "text",
+        value: "",
+        column: "3",
+      }),
       new ManyToManyField({
         name: "inv",
         label: "Numero Inventario",
         value: [],
-        column: "4",
+        column: "3",
         related: "inv",
         collection: "inventario",
         foreign_key: "inv_id",
@@ -134,7 +140,7 @@ export default {
         related: "acc",
         foreign_key: "acc_id",
         collection: "Altri codici",
-        column: "4",
+        column: "3",
         preview: (item) => {
           return `${item?.acc}`;
         },
@@ -148,7 +154,7 @@ export default {
         name: "stima",
         label: "Stima",
         value: [],
-        column: "4",
+        column: "3",
 
         related: "stima",
         foreign_key: "stima_id",
@@ -466,7 +472,7 @@ export default {
         related: "frm",
         column: "2",
         type: "manyToOne",
-        voc: "close",
+        voc: "open",
         preview: (item) => {
           return `${item?.frm}`;
         },
@@ -689,12 +695,12 @@ export default {
         related: "restauro",
         foreign_key: "restauro_id",
         preview: (item) => {
-          return `${item?.rste}`;
+          return `${item?.rstd}`;
         },
         fields: restauro.fields,
         filter: (text) => {
           if (text.trim() === "") return {};
-          return { rste: { _contains: text } };
+          return { rstd: { _contains: text } };
         },
       }),
 
@@ -850,12 +856,12 @@ export default {
         foreign_key: "fta_id",
         column: "6",
         preview: (item) => {
-          return `${item?.ftan}`;
+          return `${item?.ftat}`;
         },
         fields: fta.fields,
         filter: (text) => {
           if (text.trim() === "") return {};
-          return { ftan: { _contains: text } };
+          return { ftap: { _contains: text } };
         },
       }),
 
@@ -869,7 +875,7 @@ export default {
         foreign_key: "fonte_id",
         column: "6",
         preview: (item) => {
-          return `,${item?.fntt},${item?.fntn}`;
+          return `${item?.fnta}`;
         },
         fields: fonte.fields,
         filter: (text) => {
@@ -888,7 +894,7 @@ export default {
         foreign_key: "bib_id",
         column: "6",
         preview: (item) => {
-          return `${item?.biba} - ${item?.bibd}`;
+          return `${item?.biba},${item?.bibd}`;
         },
         fields: bib.fields,
         filter: (text) => {
@@ -906,7 +912,7 @@ export default {
         foreign_key: "mostra_id",
         column: "6",
         preview: (item) => {
-          return `${item?.mstfin + " (" + item?.mstd + "), " + item?.mstl}`;
+          return `${item?.mstd},${item?.mstt}`;
         },
         fields: mostra.fields,
         filter: (text) => {
@@ -1087,13 +1093,12 @@ export default {
   },
   tableFields() {
     return [
-      { key: "id", label: "ID", sortable: true },
-      { key: "inv", label: "INV", sortable: false },
-      { key: "nctn", label: "NCTN", sortable: false },
-      { key: "autore", label: "Autore", sortable: false },
-      { key: "ogtd", label: "OGTD", sortable: false },
-      { key: "sgti", label: "SGTI", sortable: false },
-      { key: "ldcs", label: "Localizzazione", sortable: false },
+      { key: "id", label: "ID \t", sortable: true },
+      { key: "invn", label: "Inventario", sortable: true },
+      { key: "autore", label: "Autore", sortable: true },
+      { key: "ogtd", label: "Oggetto", sortable: true },
+      { key: "sgti", label: "Soggetto", sortable: true },
+      { key: "ldcs", label: "Collocazione", sortable: true },
       { key: "actions", label: "Azione", sortable: false },
     ];
   },

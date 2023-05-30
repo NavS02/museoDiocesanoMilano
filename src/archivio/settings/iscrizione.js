@@ -22,6 +22,7 @@ export default {
                 value: null,
                 related: "isrc",
                 type: "manyToOne",
+                voc:"open",
         
                 preview: (item) => {
                   return `${item?.isrc}`;

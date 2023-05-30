@@ -59,7 +59,7 @@ export default {
             related: "dtm",
             voc:"close",
             foreign_key: "dtm_id",
-            preview: (item) => { return `${item?.id ?? '--'} - ${item?.dtm}` },
+            preview: (item) => { return `${item?.dtm}` },
 
             fields: dtm.fields,
             filter: (text) => {
@@ -75,7 +75,7 @@ export default {
             value: [],
             related: "adt",
             foreign_key: "adt_id",
-            preview: (item) => { return `${item?.id ?? '--'} - ${item?.adt}` },
+            preview: (item) => { return `${item?.adt}` },
 
             fields: adt.fields,
             filter: (text) => {

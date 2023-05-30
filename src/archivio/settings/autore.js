@@ -61,7 +61,7 @@ export default {
                 related: 'autm',
                 foreign_key: 'autm_id',
                 voc:'close',
-                preview: (item) => { return `${item?.id ?? '--'} - ${item?.autm}` },
+                preview: (item) => { return `${item?.autm}` },
                 fields: autm.fields,
                 filter: (text) => {
                     if(text.trim()==='') return {}
